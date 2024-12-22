@@ -37,11 +37,11 @@ export const Menu = () => {
                 <div className="navbar-end">
                    <div className="navbar-item">
                        <div className="buttons">
-                           <a className="button is-primary">
-                               <strong>Sign up</strong>
+                           <a className="button is-primary btn-register" >
+                               <strong>Registrarse</strong>
                            </a>
-                           <a className="button is-light">
-                               Log in
+                           <a className="button is-light btn-login">
+                               Iniciar sesión
                            </a>
                        </div>
                    </div>
