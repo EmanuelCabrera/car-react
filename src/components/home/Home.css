@@ -1,0 +1,109 @@
+.home-container {
+    min-height: 100vh;
+    padding: 2rem;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  }
+  
+  .home-hero {
+    width: 100vw;
+    min-height: 30vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #00ffd5;
+    margin: -2rem -2rem 0 -2rem;
+    padding: 4rem 2rem;
+  }
+  
+  .home-hero h1 {
+    font-size: 3rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+  }
+  
+  .home-hero h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .home-hero p {
+    font-size: 1.1rem;
+    opacity: 0.8;
+  }
+  
+  .home-button {
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
+    background: #3498db;
+    color: white;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    animation: fadeInUp 0.8s ease 0.6s;
+    opacity: 0;
+    animation-fill-mode: forwards;
+  }
+  
+  .home-button:hover {
+    background: #2980b9;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Animaciones */
+  @keyframes fadeInDown {
+    from {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* Media Queries para responsividad */
+  @media (max-width: 768px) {
+    .home-hero {
+      padding: 2rem 1rem;
+    }
+  
+    .home-hero h1 {
+      font-size: 2.2rem;
+    }
+  
+    .home-hero h2 {
+      font-size: 1.4rem;
+    }
+  
+    .home-hero p {
+      font-size: 1rem;
+      padding: 0 1rem;
+    }
+  }
+  
+  /* Efecto de transición para el toggle de visibilidad */
+  .home-hero.visible {
+    transform: scale(1);
+    opacity: 1;
+    transition: all 0.5s ease;
+  }
+  
+  .home-hero:not(.visible) {
+    transform: scale(0.95);
+    opacity: 0.7;
+    transition: all 0.5s ease;
+  }
