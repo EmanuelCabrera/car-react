@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { FaUser, FaLock, FaArrowRight } from 'react-icons/fa';
 import SocialLogin from './SocialLogin';
 import './Login.css';
+import { useAuth } from '../../context/AuthContext';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -10,17 +11,48 @@ const Login = () => {
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const { login } = useAuth();
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
     // Validación básica
     if (!email || !password) {
       setError('Por favor, completa todos los campos');
       return;
     }
-    // Aquí iría la lógica de autenticación
-    console.log('Iniciando sesión con:', { email, password });
-    // Redirigir al dashboard después del login exitoso
-    navigate('/dashboard');
+  
+    try {
+      const response = await fetch('http://localhost:3000/auth/jwt/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: new URLSearchParams({
+          email: email,
+          password: password,
+        }),
+      });
+  
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.detail || 'Error al iniciar sesión');
+      }
+  
+      const data = await response.json();
+      
+      // Guardar el token en el contexto de autenticación
+      login(data.token, {
+        name: data.user.name, // Nombre por defecto del email
+        email: data.user.email,
+        picture: data.user.picture
+      });
+  
+      // Redirigir al dashboard después del login exitoso
+      navigate('/dashboard');
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Error al conectar con el servidor');
+    }
   };
 
   return (
