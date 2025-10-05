@@ -43,7 +43,7 @@ const Login = () => {
       
       // Guardar el token en el contexto de autenticación
       login(data.token, {
-        name: data.user.name, // Nombre por defecto del email
+        name: data.user.name,
         email: data.user.email,
         picture: data.user.picture
       });
